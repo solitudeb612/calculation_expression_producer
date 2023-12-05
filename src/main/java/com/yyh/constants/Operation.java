@@ -1,4 +1,4 @@
-package com.yyh.entity;
+package com.yyh.constants;
 
 public class Operation {
     public static final String ADDITION = "+";

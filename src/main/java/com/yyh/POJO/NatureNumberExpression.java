@@ -1,9 +1,11 @@
-package com.yyh.entity;
+package com.yyh.POJO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 
 @EqualsAndHashCode
@@ -12,6 +14,10 @@ public class NatureNumberExpression implements Expression {
     private List listNumbers;
     private List listOperations;
     private String answer;
+
+    private String combinedExpression;
+
+
 
     /**加上@EqualsAndHashCode后再也不用写烦人的hashcode和equals方法了**/
 //    @Override
@@ -81,43 +87,41 @@ public class NatureNumberExpression implements Expression {
 //        return result;
 //    }
 
+    /**
+     * 虽然加了@EqualsAndHashCode，还是需要重写equals方法，因为@EqualsAndHashCode认为1+2和2+1是不同的式子
+     * @param o
+     * @return
+     */
 
     @Override
-    public String toString() {
-        return "NatureNumberExpression{" +
-                "listNumbers=" + listNumbers +
-                ", listOperations=" + listOperations +
-                ", answer='" + answer + '\'' +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NatureNumberExpression)) return false;
+        NatureNumberExpression that = (NatureNumberExpression) o;
+        return unorderedListEquals(listNumbers, that.listNumbers) &&
+                unorderedListEquals(listOperations, that.listOperations) &&
+                Objects.equals(answer, that.answer);
+//                Objects.equals(combinedExpression, that.combinedExpression);
     }
 
     @Override
-    public List getListNumbers() {
-        return listNumbers;
+    public int hashCode() {
+        return Objects.hash(unorderedListHashCode(listNumbers), unorderedListHashCode(listOperations), answer);
     }
 
-    @Override
-    public List getListOperations() {
-        return listOperations;
+    private boolean unorderedListEquals(List<String> list1, List<String> list2) {
+        if (list1 == null || list2 == null) {
+            return Objects.equals(list1, list2);
+        }
+        return new HashSet<>(list1).equals(new HashSet<>(list2));
     }
 
-    @Override
-    public void setListNumbers(List listNumbers) {
-        this.listNumbers = listNumbers;
+    private int unorderedListHashCode(List<String> list) {
+        if (list == null) {
+            return 0;
+        }
+        return new HashSet<>(list).hashCode();
     }
 
-    @Override
-    public void setListOperations(List listOperations) {
-        this.listOperations = listOperations;
-    }
 
-    @Override
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    @Override
-    public String getAnswer() {
-        return answer;
-    }
 }

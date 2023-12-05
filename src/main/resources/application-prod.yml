@@ -1,0 +1,25 @@
+server:
+  port: 9999
+
+spring:
+  datasource:
+    username: root
+    password: 88888888@yyh
+    url: jdbc:mysql://8.130.77.84:3306/calculation
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+redis:
+  port: 6379
+  host: 8.130.77.84
+
+
+logging:
+  level:
+    com.yyh: debug
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
