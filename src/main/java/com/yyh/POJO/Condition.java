@@ -6,12 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Condition {
+public class Condition implements Serializable {
     //产生expression的数量（要产生多少道题）
     private int generate_expression_number = 5;
     //expression中操作数的数量（要产生几式运算题）

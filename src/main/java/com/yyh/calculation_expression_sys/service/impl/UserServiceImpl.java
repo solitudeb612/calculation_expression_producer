@@ -48,7 +48,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
             // 存入redis
             loginUser.setPassword(null);
-            redisTemplate.opsForValue().set(key,loginUser,30, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(key,loginUser,1440, TimeUnit.MINUTES);
 
             // 返回数据
             Map<String, Object> data = new HashMap<>();
@@ -68,13 +68,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             Map<String, Object> data = new HashMap<>();
             data.put("name",loginUser.getUsername());
             data.put("avatar",loginUser.getAvatar());
-
-            //角色
-            List<String> roleList = this.baseMapper.getRoleNameByUserId(loginUser.getId());
-            data.put("roles", roleList);
             return data;
         }
- 
         return null;
     }
 

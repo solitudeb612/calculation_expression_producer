@@ -1,8 +1,12 @@
 package com.yyh.POJO;
 
+import lombok.Data;
+
+import java.io.Serializable;
 import java.util.List;
 
-public interface Expression<T,V,S> {
+
+public interface Expression<T,V,S>  {
     public List<T> getListNumbers();
     public List<V> getListOperations();
     public S getAnswer();
@@ -15,5 +19,9 @@ public interface Expression<T,V,S> {
     public void setAnswer(String answer);
     public void setCombinedExpression(String CombinedExpression);
 
+    public Integer getId();
+    public void setId(Integer id);
+    public Boolean getIsCorrect();
+    public void setIsCorrect(Boolean isCorrect);
 
 }

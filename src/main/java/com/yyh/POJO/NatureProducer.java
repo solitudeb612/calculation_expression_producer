@@ -27,6 +27,7 @@ public class NatureProducer implements Producer {
         String answer;
         boolean is_decimal;
         BigDecimal result;
+        int id;
 
         while (expressions.size() < condition.getGenerate_expression_number()) {
             // 生成表达式并添加到列表中
@@ -75,7 +76,10 @@ public class NatureProducer implements Producer {
                     result = new BigDecimal(answer); // 使用字符串构造函数创建BigDecimal对象
                     is_decimal = Checker.checkResultPrecision(result); // 调用checkResultPrecision方法
                     if (!is_decimal){
+                        id = expressions.size() + 1;
+                        expression.setId(id);
                         expressions.add(expression);
+
                     }
                 } catch (NumberFormatException e) {
 

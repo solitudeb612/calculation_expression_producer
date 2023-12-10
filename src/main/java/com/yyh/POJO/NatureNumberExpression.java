@@ -1,8 +1,10 @@
 package com.yyh.POJO;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -10,12 +12,15 @@ import java.util.Objects;
 
 @EqualsAndHashCode
 @Data
-public class NatureNumberExpression implements Expression {
+@JsonDeserialize(as = NatureNumberExpression.class)
+public class NatureNumberExpression implements Expression, Serializable {
     private List listNumbers;
     private List listOperations;
     private String answer;
 
     private String combinedExpression;
+    private Integer id;
+    private Boolean  isCorrect;
 
 
 

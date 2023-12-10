@@ -41,7 +41,7 @@ public class UserController {
         if (data != null) {
             return Result.success("获取用户信息成功", data);
         }
-        return Result.success("获取用户信息成功", data);
+        return Result.fail("无法找到用户信息，token可能无效或已过期", data);
     }
 
     @PostMapping("/logout")
